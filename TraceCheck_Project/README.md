@@ -121,11 +121,34 @@ Or double-click `start_windows.bat`.
 
 ## Import format
 
-Accepted file extensions: `.csv`, `.json`, `.jsonl` and `.ndjson`.
+Accepted file extensions are `.csv`, `.json`, `.jsonl` and `.ndjson`. Imports are UTF-8 text, limited to 10 MB and 50,000 records per file. CSV files need a header row. JSON may be a single record object, an array of record objects, or an object with a `records` array. JSONL/NDJSON contains one JSON object per non-empty line. Each record must be an object (or CSV row) and must provide an `event_type` or `type` value; rows without a recognized event type are skipped with an import error.
 
-Useful fields include `record_id`, `source_id`, `source_system`, `event_type`, `timestamp`, `request_id`, `vendor_id`, `credential_id`, `actor`, `action`, `ip_address`, `approval_ref`, `vendor_field`, `resource_path`, `record_count`, `size_bytes` and `schedule`.
+The importer accepts canonical names and common aliases. Field names are case-insensitive; spaces and hyphens are normalized to underscores. Only `event_type` (or alias `event`/`type`) is required. Other fields are optional and retained in the original payload. Use these canonical columns where available:
 
-Example CSV:
+| Field | Common aliases | Purpose |
+|---|---|---|
+| `record_id` | `id` | Stable source record identifier; generated from the record when omitted. |
+| `source_id` | `evidence_id`, `evidence`, `source`, `log_id` | Evidence item or source-log identifier. |
+| `source_system` | `system`, `platform`, `application` | System that produced the event. |
+| `event_type` | `event`, `type`, `activity_type` | Event category; required for import. |
+| `timestamp` | `event_time`, `time`, `datetime`, `created_at`, `occurred_at` | Event time. Supply `Z` or an explicit UTC offset when known. |
+| `request_id` | `requestid`, `correlation_id`, `api_request_id` | Exact join key for API/vendor-change correlation. |
+| `vendor_id` | `vendor`, `supplier_id` | Vendor or supplier identifier. |
+| `credential_id` | `key_id`, `integration_key`, `token_id`, `service_account` | Credential or integration identity. |
+| `actor` | `user`, `username`, `principal`, `initiator` | User, service, or principal associated with the event. |
+| `action` | `operation`, `method`, `activity` | Operation performed. |
+| `ip_address` | `ip`, `source_ip`, `client_ip` | Source address. |
+| `approval_ref` | `approval_reference`, `approval_id`, `ticket_approval` | Approval or change-ticket reference. |
+| `vendor_field` | `field`, `changed_field`, `attribute` | Vendor field affected, such as `bank_account`. |
+| `resource_path` | `destination_path`, `path`, `object_path`, `resource` | File, endpoint, or resource path. |
+| `record_count` | `rows`, `records`, `item_count`, `exported_records` | Number of records returned or changed. |
+| `size_bytes` | `bytes`, `file_size_bytes` | Transfer or file size in bytes. |
+| `schedule` | `schedule_type`, `frequency`, `run_type` | Business schedule/context, such as `weekly`. |
+| `record_origin` | `provenance`, `origin` | Provenance label; defaults to `imported`. |
+| `expected_outcome` | `expected`, `ground_truth` | Optional expected result for validation data. |
+| `description` | `message`, `details`, `summary` | Human-readable event context. |
+
+Example CSV (the blank approval reference in the second row is intentional):
 
 ```csv
 record_id,source_id,source_system,event_type,timestamp,request_id,vendor_id,vendor_field,approval_ref
@@ -133,7 +156,16 @@ api-001,E18,TallyBridge API,api_request,2026-09-03T01:44:30Z,req-001,V-1001,bank
 change-001,E19,Vendor change log,vendor_change,2026-09-03T01:44:31Z,req-001,V-1001,bank_account,
 ```
 
-Use a timezone suffix (`Z` or an explicit offset) when known. Timezone-naive values are retained as original text and labelled unknown; TraceCheck does not assume UTC. Original source fields are retained in `payload_json`.
+Equivalent JSON array:
+
+```json
+[
+  {"record_id":"api-001","source_id":"E18","source_system":"TallyBridge API","event_type":"api_request","timestamp":"2026-09-03T01:44:30Z","request_id":"req-001","vendor_id":"V-1001","vendor_field":"bank_account"},
+  {"record_id":"change-001","source_id":"E19","source_system":"Vendor change log","event_type":"vendor_change","timestamp":"2026-09-03T01:44:31Z","request_id":"req-001","vendor_id":"V-1001","vendor_field":"bank_account","approval_ref":""}
+]
+```
+
+Timestamps with `Z` or an explicit offset are normalized to UTC. A timezone-naive timestamp is kept as original text and labelled unknown; TraceCheck never assumes UTC. Unparseable or missing timestamps are retained with their status. Original source fields are preserved in `payload_json`. Duplicate records are skipped using a content fingerprint, and import history reports skipped rows and per-row errors.
 
 ## Initial detection rules
 

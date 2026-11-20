@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+tracecheck.sqlite3
+tracecheck.sqlite3-shm
+tracecheck.sqlite3-wal
+.env
+.DS_Store
+.streamlit/secrets.toml

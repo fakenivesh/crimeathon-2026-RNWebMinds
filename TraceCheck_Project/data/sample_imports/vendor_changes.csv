@@ -1,0 +1,3 @@
+record_id,source_id,source_system,event_type,timestamp,request_id,vendor_id,credential_id,actor,action,vendor_field,approval_ref
+sample-change-001,E19,Vendor master change log,vendor_change,2026-09-03T01:44:31Z,sample-req-001,V-1001,key-demo-01,tallybridge-integration,update_phone,phone,APR-2026-001
+sample-change-002,E19,Vendor master change log,vendor_change,2026-09-03T01:46:02Z,sample-req-002,V-1002,key-demo-01,tallybridge-integration,update_email,email,APR-2026-002

@@ -1,0 +1,102 @@
+[
+  {
+    "evidence_id": "E01",
+    "description": "Large vendor exports are noted in the case analysis; exact raw values are not reproduced in the presentation.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E02",
+    "description": "Ten additional support integration export create/download cycles are noted in the case analysis.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E03",
+    "description": "SSO activity is listed as a relevant identity context source.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E04",
+    "description": "TallyBridge key key-tb-07 is summarized as read:write all-modules, with no recorded IP restriction or token lifetime.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E05",
+    "description": "Finance-path access is listed as a relevant storage-access finding.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E06",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E07",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E08",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E09",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E10",
+    "description": "Policy/control gap evidence is referenced in the presentation; detailed fields are not reproduced there.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E11",
+    "description": "Audit/control gap evidence is referenced in the presentation; detailed fields are not reproduced there.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E12",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E13",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E14",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E15",
+    "description": "Private-link flow is listed as a technical input source.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E16",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E17",
+    "description": "Reviewed evidence item; detailed contents are not described in the submitted presentation.",
+    "detail_available_in_presentation": false
+  },
+  {
+    "evidence_id": "E18",
+    "description": "September API log: 71 vendor-change API requests; counts stated as 44 phone, 26 email and 1 bank-account update.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E19",
+    "description": "Vendor-change records: 71 edits joined to E18 by exact request IDs; V-0412 bank change has a blank approval reference.",
+    "detail_available_in_presentation": true
+  },
+  {
+    "evidence_id": "E20",
+    "description": "Maintenance/build-host context is noted; IP addresses may be reassigned.",
+    "detail_available_in_presentation": true
+  }
+]
